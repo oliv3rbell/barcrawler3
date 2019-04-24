@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
 
 
@@ -77,7 +78,7 @@ class RegisterPage extends State<Register> {
 
     final signIn = FlatButton(
       child: Text(
-        'Already have a BarCrawler Account? Sign In',
+        'Already have a BarCrawler Account? \n \t \t \t \t \t \t \t \t \t \t \t \t Sign In',
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {

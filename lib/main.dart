@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'Setup/login.dart';
 import 'Setup/register.dart';
-import 'ProfileStuff/home.dart';
+import 'Setup/home.dart';
+import 'Maps.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -9,7 +11,8 @@ class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
     Register.tag: (context) => Register(),
-    HomePage.tag: (context) => HomePage(),
+    Home.tag: (context) => Home(),
+    MapPage.tag: (context) => MapPage(),
     
   };
 

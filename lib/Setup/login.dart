@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'register.dart';
+import 'home.dart';
+
 
 class LoginPage extends StatefulWidget {
   static String tag = 'LoginPage';
@@ -8,19 +11,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _name, _email, _password;
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 48.0,
-        //child: Image.asset('assets/logo.png'),
-        child: Text("BarCrawler",
+        //child: Image.asset('assets/images/logo.png'),
+        child: Text("BarCrawler.",
         style:TextStyle(
-          fontSize: 50.0,
+          fontSize: 50.0, fontWeight: FontWeight.bold
         )),
-      ),
+      
     );
 
     final email = TextFormField(
@@ -32,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
+       onSaved: (input) => _email = input
     );
 
     final password = TextFormField(
@@ -43,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
+      onSaved: (input) => _password = input,
     );
 
     final loginButton = Padding(
@@ -52,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          //Navigator.of(context).pushNamed(HomePage.tag);
+          signIn();
         },
         padding: EdgeInsets.all(12),
         color: Colors.redAccent,
@@ -62,9 +66,10 @@ class _LoginPageState extends State<LoginPage> {
 
     final signUp = FlatButton(
       child: Text(
-        'Dont have a BarCrawler Account? Sign up ',
+        'Dont have a BarCrawler Account? \n \t \t \t \t \t \t \t \t \t \t Sign up ',
         style: TextStyle(color: Colors.black54),
       ),
+
       onPressed: () {
         Navigator.of(context).pushNamed(Register.tag);
       },
@@ -73,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
+        key: _formKey,
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
@@ -90,6 +96,19 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> signIn() async{
+    final formState = _formKey.currentState;
+    if(formState.validate()){
+      formState.save();
+      try{
+        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Home(user: user)));
+      }catch(e){
+        print(e.messge); //More Firebase Authentication for list activation (Oliver)
+      }
+    }
   }
 }
 

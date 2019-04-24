@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // Method and refere to a list of ID/ LatLng values 
 
 class MapPage extends StatefulWidget {
+  static String tag = 'MapPage';
   @override
   _MyAppState createState() => _MyAppState();
 }

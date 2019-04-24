@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "71235042052",
+    "firebase_url": "https://barcrawler-d990c.firebaseio.com",
+    "project_id": "barcrawler-d990c",
+    "storage_bucket": "barcrawler-d990c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71235042052:android:a3304b729eef8275",
+        "android_client_info": {
+          "package_name": "com.example.barcrawler3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71235042052-1n0etdonhv3j35h0lf35rc62oiu4h6md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvyxBWjU9u_oUI8d5uyztaI7fhusGqyaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71235042052-1n0etdonhv3j35h0lf35rc62oiu4h6md.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
