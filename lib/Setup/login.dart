@@ -11,104 +11,97 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _name, _email, _password;
+  String _email, _password;
+
   @override
   Widget build(BuildContext context) {
-    final logo = Hero(
-      tag: 'hero',
-        //child: Image.asset('assets/images/logo.png'),
-        child: Text("BarCrawler.",
-        style:TextStyle(
-          fontSize: 50.0, fontWeight: FontWeight.bold
-        )),
-      
-    );
-
-    final email = TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      initialValue: 'Example@gmail.com',
-      decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-       onSaved: (input) => _email = input
-    );
-
-    final password = TextFormField(
-      autofocus: false,
-      initialValue: 'password',
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-      onSaved: (input) => _password = input,
-    );
-
-    final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onPressed: () {
-          signIn();
-        },
-        padding: EdgeInsets.all(12),
-        color: Colors.redAccent,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
-      ),
-    );
-
-    final signUp = FlatButton(
-      child: Text(
-        'Dont have a BarCrawler Account? \n \t \t \t \t \t \t \t \t \t \t Sign up ',
-        style: TextStyle(color: Colors.black54),
-      ),
-
-      onPressed: () {
-        Navigator.of(context).pushNamed(Register.tag);
-      },
-    );
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
+    return new Scaffold(
+      appBar: new AppBar(),
+      body: Form(
         key: _formKey,
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        child: Column(
           children: <Widget>[
-            logo,
-            SizedBox(height: 48.0),
-            email,
-            SizedBox(height: 8.0),
-            password,
-            SizedBox(height: 4.0),
-            loginButton,
-            SizedBox(height: 10.0),
-            signUp,
+            SizedBox(height: 75.0),
+            Hero(
+              tag: 'hero',
+              
+              child: Text("BarCrawler.",
+              style:TextStyle(
+                fontSize: 50.0, fontWeight: FontWeight.bold
+              )),
+            ),
+            SizedBox(height: 100.0),
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              autofocus: false,
+              validator: (input) {
+                if(input.isEmpty){
+                  return 'Provide an email';
+                }
+              },
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+                hintText: 'Email'
+              ),
+              onSaved: (input) => _email = input,
+            ),
+            SizedBox(height: 20.0),
+            TextFormField(
+              autofocus: false,
+              validator: (input) {
+                if(input.length < 6){
+                  return 'Longer password please';
+                }
+              },
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+                hintText: 'Password'
+              ),
+              onSaved: (input) => _password = input,
+              obscureText: true,
+            ),
+            SizedBox(height: 20.0),
+            RaisedButton(
+              onPressed: signIn,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+              padding: EdgeInsets.all(12),
+              color: Colors.redAccent,
+              child: Text('Sign in', style: TextStyle(color: Colors.white)),
+            ),
+            SizedBox(height: 20.0),
+            FlatButton(
+              child: Text(
+                'Dont have a BarCrawler Account? \n \t \t \t \t \t \t \t \t \t \t Sign up ',
+                style: TextStyle(color: Colors.black54),
+              ),
+
+              onPressed: () {
+                Navigator.of(context).pushNamed(Register.tag);
+              },
+            ),
           ],
-        ),
+        )
       ),
     );
   }
 
-  Future<void> signIn() async{
-    final formState = _formKey.currentState;
-    if(formState.validate()){
-      formState.save();
+  void signIn() async {
+    if(_formKey.currentState.validate()){
+      _formKey.currentState.save();
       try{
         FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home(user: user)));
       }catch(e){
-        print(e.messge); //More Firebase Authentication for list activation (Oliver)
+        print(e.message);
       }
     }
   }
 }
+
 
