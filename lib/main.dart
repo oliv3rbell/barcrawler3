@@ -4,6 +4,7 @@ import 'Setup/login.dart';
 import 'Setup/register.dart';
 import 'Setup/home.dart';
 import 'Maps.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 void main() => runApp(MyApp());
@@ -21,14 +22,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return MaterialApp(
+      
       title: 'BarCrawler',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
         fontFamily: 'Nunito',
       ),
-      home: LoginPage(),
+      home: Home(),
       routes: routes,
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcrawler3/Maps.dart';
 import 'package:barcrawler3/ProfileStuff/Feed.dart';
+import 'package:barcrawler3/Search.dart';
 
 class Home extends StatefulWidget {
   static String tag = 'Home';
@@ -163,19 +164,7 @@ class _HomeState extends State<Home> {
               ],
             )),
   
-
-              TextFormField(
-                decoration: InputDecoration(labelText:"SEARCH"),
-                focusNode: null,
-                  //onFieldSubmitted: showSearch(context: ,delegate: ,query: ),
-                  ),
-                  ListBody(
-                    children: <Widget>[
-                      SingleChildScrollView( 
-                        )
-                     
-                    ],
-                  )
+              UserList(),
             ],
           ),
         ),
