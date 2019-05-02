@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ProfileStuff/Feed.dart';
 import 'Setup/login.dart';
 import 'Setup/register.dart';
 import 'Setup/home.dart';
@@ -13,6 +14,8 @@ class MyApp extends StatelessWidget {
     Register.tag: (context) => Register(),
     Home.tag: (context) => Home(),
     MapPage.tag: (context) => MapPage(),
+    Feed.tag: (context) => Feed(),
+
     
   };
 

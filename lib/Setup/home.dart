@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:barcrawler3/Maps.dart';
+import 'package:barcrawler3/ProfileStuff/Feed.dart';
 
 class Home extends StatefulWidget {
   static String tag = 'Home';
@@ -87,9 +88,11 @@ class _HomeState extends State<Home> {
                             
                           ),
                           new RaisedButton(
-                            onPressed:() {},
+                            onPressed:() {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Feed()));
+                              },
                             child: Text(
-                              'Groups',
+                              'Feed',
                               style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
                             ),
                             color: Colors.red,
